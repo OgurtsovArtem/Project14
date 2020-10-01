@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+require('mongoose-type-url');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
@@ -26,9 +27,8 @@ const userSchema = new mongoose.Schema({
     maxlength: 30,
   },
   avatar: {
-    type: String,
+    type: mongoose.SchemaTypes.Url,
     required: true,
-    match: [/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?(\.(jpg|png|jpeg|gif))$/,'Кажется это со ссылкой что-то не так:(']
   },
 });
 
