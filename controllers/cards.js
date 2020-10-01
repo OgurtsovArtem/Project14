@@ -33,14 +33,16 @@ module.exports.deleteCardId = (req,res) => {
     });
 }
 module.exports.createCard = (req, res) => {
-  const { name, link, ownerId } = req.body;
-
+  const { name, link, ownerId = req.user._id } = req.body;
   Card.create({ name, link, owner: ownerId })
-    .then(card => res.send({ data: card }))
+    .orFail()
+    .then(card => {
+      res.send({ data: card })
+    })
     .catch((err) => {
       if (err.name === "ValidationError") {
       res.status(400).send({ message: `Переданы некорректные данные ${err}` });
-    } else {
+    }else {
       res.status(500).send({ message: "Ошибка сервера" });
     }
     });
