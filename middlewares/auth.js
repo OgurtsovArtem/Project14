@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 // eslint-disable-next-line no-undef
-const { JWT_SECRET } = process.env;
-
+const { JWT_SECRET = 'dev-key' } = process.env;
 const handleAuthError = (res) => {
   res
     .status(401)

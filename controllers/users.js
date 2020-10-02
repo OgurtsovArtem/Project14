@@ -1,9 +1,8 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 // eslint-disable-next-line no-undef
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET = 'dev-key' } = process.env
 module.exports.getUser = (req,res) => {
   User.find({})
     .then(users => res.send({ data: users }))
