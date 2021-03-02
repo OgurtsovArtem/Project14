@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+require('mongoose-type-url');
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -9,9 +9,8 @@ const cardSchema = new mongoose.Schema({
     maxlength: 30,
   },
   link: {
-    type: String,
+    type: mongoose.SchemaTypes.Url,
     required: true,
-    match: [/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?(\.(jpg|png|jpeg|gif))$/,'Некорректный URL']
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

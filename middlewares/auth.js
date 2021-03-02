@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-
+// eslint-disable-next-line no-undef
+const { JWT_SECRET = 'dev-key' } = process.env;
 const handleAuthError = (res) => {
   res
     .status(401)
@@ -21,7 +22,7 @@ module.exports.auth = (req, res, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, 'super-strong-secret');
+    payload = jwt.verify(token, JWT_SECRET);
   } catch (err) {
     return handleAuthError(res);
   }
